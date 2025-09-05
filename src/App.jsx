@@ -1,35 +1,90 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from 'react';
+import './App.css';
+
+const datosCuriosos = [
+  { texto: "🐝 Las abejas pueden reconocer rostros humanos", esVerdadero: true },
+  { texto: "🌞 El sol es más pequeño que la Tierra", esVerdadero: false },
+  { texto: "🐫 Los camellos tienen tres párpados", esVerdadero: true },
+  { texto: "🍅 Los tomates son vegetales", esVerdadero: false },
+  { texto: "💧 El agua hierve a 50°C en el nivel del mar", esVerdadero: false },
+  { texto: "🐙 Los pulpos tienen tres corazones", esVerdadero: true },
+  { texto: "🍌 Los humanos comparten 50% del ADN con los plátanos", esVerdadero: true },
+  { texto: "🦒 Las jirafas duermen solo 30 minutos al día", esVerdadero: true },
+  { texto: "❤️ El corazón humano late 1 millón de veces al día", esVerdadero: false },
+  { texto: "🪐 Un día en Venus es más largo que su año", esVerdadero: true },
+  { texto: "⛰️ El Everest es la montaña más alta del sistema solar", esVerdadero: false },
+  { texto: "🐌 Los caracoles pueden dormir hasta 3 años", esVerdadero: true },
+  { texto: "🦇 Los murciélagos son ciegos", esVerdadero: false },
+  { texto: "🍯 La miel nunca se echa a perder", esVerdadero: true },
+  { texto: "🐬 Los delfines tienen nombres entre ellos", esVerdadero: true }
+];
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [indice, setIndice] = useState(0);
+  const [respuesta, setRespuesta] = useState(null);
+  const [vidas, setVidas] = useState(3);
+  const [juegoTerminado, setJuegoTerminado] = useState(false);
+
+  const verificar = (opcion) => {
+    if (juegoTerminado) return;
+
+    const correcto = datosCuriosos[indice].esVerdadero === opcion;
+
+    if (correcto) {
+      setRespuesta("🎉 ¡Correcto! Eres muy inteligente 😎");
+    } else {
+      const nuevasVidas = vidas - 1;
+      setVidas(nuevasVidas);
+      setRespuesta("❌ Incorrecto. ¡Perdiste una vida!");
+      if (nuevasVidas === 0) {
+        setJuegoTerminado(true);
+        return;
+      }
+    }
+
+    setTimeout(() => {
+      setIndice((prev) => (prev + 1) % datosCuriosos.length);
+      setRespuesta(null);
+    }, 2000);
+  };
+
+  const reiniciarJuego = () => {
+    setIndice(0);
+    setVidas(3);
+    setRespuesta(null);
+    setJuegoTerminado(false);
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="app">
+      <h1>🤔 ¿Mentira o Verdad?</h1>
+      <p className="descripcion">Tienes 3 vidas. ¡Cuida tus corazones! 💖</p>
+
+      <div className="vidas">
+        {"❤️".repeat(vidas)}{"🤍".repeat(3 - vidas)}
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+
+      {juegoTerminado ? (
+        <>
+          <p className="respuesta final">😵 ¡Se acabaron tus oportunidades!</p>
+          <button className="reiniciar" onClick={reiniciarJuego}>🔄 Reiniciar juego</button>
+        </>
+      ) : (
+        <>
+          <div className="tarjeta">
+            <p className="dato">{datosCuriosos[indice].texto}</p>
+          </div>
+
+          <div className="botones">
+            <button onClick={() => verificar(true)}>✅ Verdad</button>
+            <button onClick={() => verificar(false)}>❌ Mentira</button>
+          </div>
+
+          {respuesta && <p className="respuesta">{respuesta}</p>}
+        </>
+      )}
+    </div>
+  );
 }
 
-export default App
+export default App;

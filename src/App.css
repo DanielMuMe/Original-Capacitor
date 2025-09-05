@@ -1,42 +1,108 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+/* Fondo general */
+body {
+  margin: 0;
+  background: linear-gradient(135deg, #f9d4ff, #d4f1ff);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Contenedor principal */
+.app {
+  background: linear-gradient(145deg, #ffffff, #ffe6f0);
+  padding: 40px;
+  border-radius: 30px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+  max-width: 600px;
+  width: 90%;
   text-align: center;
+  border: 3px solid #ffa7c4;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/* Título */
+h1 {
+  font-size: 2.5rem;
+  color: #c40060;
+  margin-bottom: 10px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Subtítulo */
+.descripcion {
+  font-size: 1rem;
+  color: #6a0572;
+  margin-bottom: 20px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+/* Vidas (corazones) */
+.vidas {
+  font-size: 1.8rem;
+  margin-bottom: 15px;
 }
 
-.card {
-  padding: 2em;
+/* Tarjeta del dato curioso */
+.tarjeta {
+  background-color: #fff0f6;
+  padding: 30px;
+  border-radius: 20px;
+  font-size: 1.6rem;
+  color: #5c005c;
+  margin-bottom: 20px;
+  min-height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed #c40060;
 }
 
-.read-the-docs {
-  color: #888;
+/* Botones de Verdad / Mentira */
+.botones button {
+  background-color: #ff69b4;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 24px;
+  font-size: 1.1rem;
+  margin: 10px;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.3s ease;
+  box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
+}
+
+.botones button:hover {
+  background-color: #ff85c1;
+  transform: scale(1.05);
+}
+
+/* Texto de respuesta (acierto/error) */
+.respuesta {
+  margin-top: 25px;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #800080;
+}
+
+/* Texto cuando pierdes */
+.respuesta.final {
+  font-size: 1.5rem;
+  color: #b00020;
+  font-weight: bold;
+}
+
+/* Botón reiniciar */
+.reiniciar {
+  background-color: #00b894;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 24px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 20px;
+  box-shadow: 0 5px 15px rgba(0, 184, 148, 0.4);
+}
+
+.reiniciar:hover {
+  background-color: #00cec9;
 }
